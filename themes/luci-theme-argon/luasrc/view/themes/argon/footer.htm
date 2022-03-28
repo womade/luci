@@ -1,0 +1,54 @@
+<%
+	local ver = require "luci.version"
+	local disp = require "luci.dispatcher"
+	local request  = disp.context.path
+	local category = request[1]
+	local tree = disp.node()
+	local categories = disp.node_childs(tree)
+%>
+</div>
+<footer>
+	<div class="ftc">
+		Powered by <%= ver.luciname %>
+			(<%= ver.luciversion %>) /
+		<%= ver.distversion %>
+		<% if #categories > 1 then %>
+		<ul class="breadcrumb pull-right" id="modemenu">
+			<% for i, r in ipairs(categories) do %>
+			<li<% if request[1] == r then %> class="active" <%end%>><a
+					href="<%=controller%>/<%=r%>/"><%=striptags(translate(tree.nodes[r].title))%></a> <span
+					class="divider">|</span></li>
+				<% end %>
+		</ul>
+		<% end %>
+	</div>
+</footer>
+</div>
+</div>
+
+<script>
+	var luciLocation = <%= luci.http.write_json(luci.dispatcher.context.path) %>;
+	var winHeight = $(window).height();
+	$(window).resize(function () {
+		var winWidth = $(window).width()
+		if(winWidth < 600){
+			var newHeight = $(this).height();
+			var keyboradHeight = newHeight - winHeight;
+			$(".ftc").css("bottom", keyboradHeight + 30);
+		}
+		if($(document.body).height() < 525 ){
+			if($(".ftc").css('display') != 'none'){
+				$(".ftc").hide()
+			}
+		}else{
+			if($(".ftc").css('display') == 'none'){
+				$(".ftc").show()
+			}
+		}
+	})
+</script>
+
+<script src="<%=media%>/js/script.js"></script>
+</body>
+
+</html>
