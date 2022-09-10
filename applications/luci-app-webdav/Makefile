@@ -1,17 +1,17 @@
-# Copyright (C) 2020 Openwrt.org
+# Copyright (C) 2021 Openwrt.org
 #
 # This is free software, licensed under the Apache License, Version 2.0 .
 #
 
 include $(TOPDIR)/rules.mk
 
-LUCI_TITLE:=LuCI support for Adbyby
-LUCI_DEPENDS:=+adbyby +uclient-fetch +ipset +dnsmasq-full
+LUCI_TITLE:=LuCI support for Webdav
+LUCI_DEPENDS:=+gowebdav
 LUCI_PKGARCH:=all
 
-PKG_NAME:=luci-app-adbyby-plus
-PKG_VERSION:=2.0
-PKG_RELEASE:=76
+PKG_NAME:=luci-app-webdav
+PKG_VERSION:=1.0
+PKG_RELEASE:=1
 
 include ../../luci.mk
 
